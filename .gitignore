@@ -1,2 +1,23 @@
-.vs*/**/*
-build/**/*
+## IDEs
+# Visual Studio
+/.vs/
+*.vcxproj.user
+*.pdb
+[Dd]ebug
+[Rr]elease
+# Visual Studio Code
+/.vscode/
+
+## Tools
+/compile_commands.json
+# CMake
+/CMakeUserPresets.json
+# Clangd
+/.cache/
+# Python
+/.venv/
+
+# Common binary paths
+/[Bb]uild/
+/[Ii]nstall/
+/[Pp]ackage/
