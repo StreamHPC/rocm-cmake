@@ -2,7 +2,9 @@
 # Copyright (C) 2017 Advanced Micro Devices, Inc.
 ################################################################################
 
-cmake_minimum_required (VERSION 3.6)
+cmake_minimum_required(VERSION 3.6)
+cmake_policy(VERSION 3.6...3.28)
+enable_testing()
 
 set(CMAKE_INSTALL_PREFIX "/opt/rocm" CACHE PATH "")
 
