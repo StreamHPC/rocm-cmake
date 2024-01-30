@@ -14,3 +14,5 @@ if(UNIX AND NOT APPLE)
 elseif(WIN32)
     set(CMAKE_INSTALL_PREFIX "C:\\Program Files\\AMD\\ROCm\\${ROCM_DIST_VERSION}" CACHE PATH "")
 endif()
+
+include(CMakeDependentOption)
