@@ -9,7 +9,7 @@ macro(rocm_set_parent VAR)
     set(${VAR} ${ARGN})
 endmacro()
 
-find_program(GIT NAMES git)
+find_package(Git)
 
 function(rocm_get_rev_count OUTPUT_COUNT)
     set(options)
@@ -24,9 +24,9 @@ function(rocm_get_rev_count OUTPUT_COUNT)
     endif()
 
     set(_count 0)
-    if(GIT)
+    if(GIT_FOUND)
         execute_process(
-            COMMAND git rev-list --count ${PARSE_REV}
+            COMMAND "${GIT_EXECUTABLE}" rev-list --count ${PARSE_REV}
             WORKING_DIRECTORY ${DIRECTORY}
             OUTPUT_VARIABLE REV_COUNT
             OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -87,8 +87,8 @@ endfunction()
 function(rocm_get_git_commit_tag OUTPUT_VERSION)
     set(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-    if(GIT)
-        set(GIT_COMMAND ${GIT} describe --dirty --long --match [0-9]*)
+    if(GIT_FOUND)
+        set(GIT_COMMAND "${GIT_EXECUTABLE}" describe --dirty --long --match [0-9]*)
         execute_process(
             COMMAND ${GIT_COMMAND}
             WORKING_DIRECTORY ${DIRECTORY}
