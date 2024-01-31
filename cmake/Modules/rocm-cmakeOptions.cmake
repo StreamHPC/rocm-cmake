@@ -1,0 +1,2 @@
+cmake_dependent_option(ROCM_CMAKE_BUILD_TESTING "Build ROCm CMake tests" ON ROCM_BUILD_TESTING OFF)
+cmake_dependent_option(ROCM_CMAKE_BUILD_DOCS "Build ROCm CMake documentation" ON ROCM_BUILD_DOCS OFF)

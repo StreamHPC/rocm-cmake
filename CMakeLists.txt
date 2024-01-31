@@ -8,10 +8,10 @@ enable_testing()
 
 project(rocm-cmake LANGUAGES NONE)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/share/rocmcmakebuildtools/cmake")
+find_package(ROCmCMakeBuildTools REQUIRED NO_DEFAULT_PATH PATHS "${PROJECT_SOURCE_DIR}")
+include(ROCmDefaults)
 include(ROCmOptions)
-cmake_dependent_option(ROCM_CMAKE_BUILD_TESTING "Build ROCm CMake tests" ON ROCM_BUILD_TESTING OFF)
-cmake_dependent_option(ROCM_CMAKE_BUILD_DOCS "Build ROCm CMake documentation" ON ROCM_BUILD_DOCS OFF)
+include(${PROJECT_NAME}Options)
 
 include(ROCMSetupVersion)
 rocm_setup_version(VERSION 0.11.0)
@@ -43,10 +43,10 @@ file(GLOB_RECURSE CMAKE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${CONFIGURE_D
 add_custom_target(analyze COMMAND cmake-lint ${CMAKE_FILES} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_target(format COMMAND cmake-format -i ${CMAKE_FILES} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-if(ROCM_BUILD_TESTING)
+if(ROCM_CMAKE_BUILD_TESTING)
     add_custom_target(check COMMAND "${CMAKE_CTEST_COMMAND}" --output-on-failure -C ${CMAKE_CFG_INTDIR})
     add_subdirectory(test)
 endif()
-if(ROCM_BUILD_DOCS)
+if(ROCM_CMAKE_BUILD_DOCS)
     add_subdirectory(doc)
 endif()
